@@ -1,0 +1,154 @@
+/* MARGENES DEL BODY */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* HEADER */
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+#main-header {
+  font-family: Impact;
+  background: #7760db;
+  color: white;
+  height: 80px;  
+  width: 100%;
+  left: 0;
+  top: 0;
+  position: fixed;
+} 
+
+#main-header a {
+  color: white;
+}
+
+/*NAVEGACIÓN*/
+nav {
+  float: right;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding-right: 20px;
+}
+  
+nav ul li {
+  display: inline-block;
+  line-height: 80px;
+}
+      
+nav ul li a {
+  display: block;
+  padding: 0 10px;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  background: #25dec8;
+  }
+
+/* FOOTER */
+footer {
+    background-color: #413e64;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+/*CENTRAR CONTENIDO*/
+.contenido{
+  text-align: center;
+  margin-top: 25%;
+}
+
+.Formularios{
+  text-align: center;
+  margin-top: 15%;
+}
+
+/*FUENTES*/
+h1{
+  font-family: Impact;
+  color: #ec3f58;
+}
+
+h2{
+  font-family: arial;
+  size: 20px;
+}
+
+p, label, textarea{
+  font-family: arial;
+  size: 14px;
+}
+
+/*ESTILO DE BOTONES*/
+.boton1{
+    color: white;
+    font-size: 15px;
+    padding: 0px 25px 0px 25px;
+    outline: none;
+    border: none;
+    background-color: #251d74; /*Morado oscuro*/
+    border-radius: 10px;
+    width: 150px; /*Ancho*/
+    height: 40px; /*Alto*/
+    text-decoration: none; /* Elimina el subrayado del hipervínculo */
+    display: inline-block;
+}
+
+.boton1:hover{
+    background-color: #25dec8; /*Aqua claro*/
+    cursor: pointer;
+}
+
+#registro{
+    font-size: 15px;
+    padding: 0px 25px 0px 25px;
+    outline: none;
+    border: none;
+    background-color: #251d74; /*Morado oscuro*/
+    color: white;
+    border-radius: 10px;
+    width: 150px; /*Ancho*/
+    height: 40px; /*Alto*/
+
+}
+
+#registro:hover{
+    background-color: #25dec8; /*Aqua claro*/
+    cursor: pointer;
+}
+
+/*DE LA TABLA*/
+
+td{
+  font-family: arial;
+  font-size: 15px;
+  text-align: center;
+  width: 150px;
+}
+
+table{
+  border-collapse: collapse; /* Esto colapsa los bordes de las celdas */
+  width: 80%;
+  border: 1px solid black; /* Aquí se define el borde con 1px de grosor y sólido */
+  padding: 8px;
+  border-top-color: #333333;
+  border-right-color: #333333;
+  border-left-color: #333333;
+  border-bottom-color: #333333;
+}
+
+/*FORMATO PARA URL's*/
+a{
+  color: white;
+  text-decoration: none;
+}

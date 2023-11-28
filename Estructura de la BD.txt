@@ -1,0 +1,106 @@
+P R U E B A 	D O O P L A
+
+Creando la BD
+CREATE DATABASE Prueba_Doopla;
+
+Usando la BD
+USE Prueba_Doopla;
+
+TABLA CODIGO POSTAL
+
+CREATE TABLE CodigoPostal(
+CodigoPostal INT NOT NULL PRIMARY KEY,
+Poblacion INT NOT NULL,
+Provincia VARCHAR(50) NOT NULL);
+
+TABLA DOMICILIOS
+
+CREATE TABLE Domicilios(
+DNI INT NOT NULL PRIMARY KEY,
+Calle VARCHAR(30),
+CodigoPostal INT NOT NULL,
+CONSTRAINT CodigoPostal
+FOREIGN KEY(CodigoPostal)
+REFERENCES CodigoPostal(CodigoPostal)
+);
+
+TABLA EMPLEADOS
+
+CREATE TABLE Empleados(
+Id INT NOT NULL PRIMARY KEY,
+Nombre VARCHAR(50),
+DNI INT NOT NULL,
+CONSTRAINT DNI
+FOREIGN KEY(DNI)
+REFERENCES Domicilios(DNI),
+Sueldo INT NOT NULL);
+
+TABLA TELEFONOS
+
+CREATE TABLE Telefonos (
+Id INT NOT NULL PRIMARY KEY,
+DNI INT NOT NULL,
+Telefono VARCHAR(15) NOT NULL,
+CONSTRAINT FK_Telefonos_DNI
+FOREIGN KEY(DNI)
+REFERENCES Domicilios(DNI)
+);
+
+INSERCIÓN DE DATOS
+
+CODIGO POSTAL
+INSERT INTO CodigoPostal(CodigoPostal, Poblacion, Provincia) VALUES (54407, 150,'La Liberta');
+INSERT INTO CodigoPostal(CodigoPostal, Poblacion, Provincia) VALUES (54408, 140,'Jimenez Cantu ');
+INSERT INTO CodigoPostal(CodigoPostal, Poblacion, Provincia) VALUES (54409, 130, 'La Independencia');
+
+DOMICILIOS
+INSERT INTO Domicilios(DNI, Calle, CodigoPostal) VALUES (1234, 'Ceiba', 54407 );
+INSERT INTO Domicilios(DNI, Calle, CodigoPostal) VALUES (5678, 'Aguacate', 54408 );
+INSERT INTO Domicilios(DNI, Calle, CodigoPostal) VALUES (9876, 'Av. Vía Corta', 54409 );
+
+EMPLEADOS
+INSERT INTO Empleados(Id, Nombre, DNI, Sueldo) VALUES (1, 'Roberto Silva', 1234, 500100 );
+INSERT INTO Empleados(Id, Nombre, DNI, Sueldo) VALUES (2, 'Moises Torres', 5678, 400100 );
+INSERT INTO Empleados(Id, Nombre, DNI, Sueldo) VALUES (3, 'Axel Martinez', 9876, 500200);
+
+TELEFONOS
+INSERT INTO Telefonos (Id, DNI, Telefono) VALUES (1, 1234, '55-11-22-33-44');
+INSERT INTO Telefonos (Id, DNI, Telefono) VALUES (2, 5678, '56-55-77-88-99');
+INSERT INTO Telefonos (Id, DNI, Telefono) VALUES (3, 9876, '55-99-88-77-66');
+
+CONSULTAS
+
+1. Listar a los empleados, calle, provincia y código postal, ordenados por código postal de forma descendente.
+SELECT
+Empleados.Nombre,
+Domicilios.Calle,
+CodigoPostal.Provincia,
+CodigoPostal.CodigoPostal
+FROM Empleados
+INNER JOIN Domicilios ON Empleados.DNI = Domicilios.DNI
+INNER JOIN CodigoPostal ON Domicilios.CodigoPostal = CodigoPostal.CodigoPostal
+ORDER BY
+CodigoPostal.CodigoPostal DESC;
+
+2. Lista las provincias cuya suma de salarios por cada empleado sea mayor a $500,000.
+SELECT 
+CodigoPostal.Provincia,
+SUM(Empleados.Sueldo)
+FROM Empleados
+INNER JOIN Domicilios ON Empleados.DNI = Domicilios.DNI
+INNER JOIN CodigoPostal ON Domicilios.CodigoPostal = CodigoPostal.CodigoPostal
+GROUP BY
+CodigoPostal.Provincia
+HAVING 
+SUM(Empleados.Sueldo) > 500000;
+
+3. Lista el nombre de los empleados y teléfonos de la provincia “Chiapas”
+SELECT 
+Empleados.Nombre,
+Telefonos.Telefono
+FROM Empleados
+INNER JOIN Telefonos ON Telefonos.DNI = Empleados.DNI
+INNER JOIN Domicilios ON Domicilios.DNI = Empleados.DNI
+INNER JOIN CodigoPostal ON CodigoPostal.CodigoPostal = Domicilios.CodigoPostal
+WHERE 
+CodigoPostal.Provincia = 'Chiapas';
